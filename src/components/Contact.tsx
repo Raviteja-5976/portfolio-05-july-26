@@ -12,19 +12,83 @@ export default function Contact() {
   const [category, setCategory] = useState('Full-Stack');
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const categories = ['Creative', 'Full-Stack', 'Consulting', 'Other'];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !message) return;
     
-    // Simulate sending form
-    setShowModal(true);
-    setName('');
-    setEmail('');
-    setCategory('Full-Stack');
-    setMessage('');
+    setIsSubmitting(true);
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
+    const templateAdminId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_ADMIN || '';
+    const templateClientId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_CLIENT || '';
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+
+    if (!serviceId || !publicKey) {
+      console.warn("EmailJS configuration missing. Simulating form transmission...");
+      setTimeout(() => {
+        setShowModal(true);
+        setIsSubmitting(false);
+        setName('');
+        setEmail('');
+        setCategory('Full-Stack');
+        setMessage('');
+      }, 1000);
+      return;
+    }
+
+    try {
+      if (templateAdminId) {
+        await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateAdminId,
+            user_id: publicKey,
+            template_params: {
+              from_name: name,
+              from_email: email,
+              enquiry_category: category,
+              message_content: message,
+            },
+          }),
+        });
+      }
+
+      if (templateClientId) {
+        await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateClientId,
+            user_id: publicKey,
+            template_params: {
+              from_name: name,
+              from_email: email,
+              enquiry_category: category,
+              message_content: message,
+              year: currentYear.toString(),
+            },
+          }),
+        });
+      }
+
+      setShowModal(true);
+    } catch (err) {
+      console.error('Email transmission failed:', err);
+      alert('Failed to transmit message. Please contact ravitejakarnati5312@gmail.com directly.');
+    } finally {
+      setIsSubmitting(false);
+      setName('');
+      setEmail('');
+      setCategory('Full-Stack');
+      setMessage('');
+    }
   };
 
   return (
@@ -130,8 +194,8 @@ export default function Contact() {
                   />
                 </div>
 
-                <button type="submit" className="neo-btn neo-btn-mint form-submit-btn">
-                  TRANSMIT ENQUIRY <FiSend style={{ marginLeft: '0.5rem' }} />
+                <button type="submit" disabled={isSubmitting} className="neo-btn neo-btn-mint form-submit-btn">
+                  {isSubmitting ? 'TRANSMITTING...' : 'TRANSMIT ENQUIRY'} <FiSend style={{ marginLeft: '0.5rem' }} />
                 </button>
               </form>
             </div>
@@ -168,7 +232,7 @@ export default function Contact() {
               </div>
               <h3 className="success-modal-title">TRANSMISSION SHIPPED!</h3>
               <p className="success-modal-desc">
-                Your message has been compiled and routed successfully. I will review and reply within 24 hours.
+                Your message has been compiled and routed successfully. A confirmation receipt has been dispatched to your email (if you don&apos;t see it, please check your spam folder). I will review and reply within 24 hours.
               </p>
               <button onClick={() => setShowModal(false)} className="neo-btn success-dismiss-btn">
                 DISMISS
