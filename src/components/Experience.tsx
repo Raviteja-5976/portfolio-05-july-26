@@ -1,11 +1,12 @@
 'use client';
 
-import { FiBriefcase, FiAward } from 'react-icons/fi';
+import { FiBriefcase, FiAward, FiExternalLink } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 interface WorkExp {
   role: string;
   company: string;
+  url?: string;
   duration: string;
   location: string;
   description: string;
@@ -21,6 +22,20 @@ interface Cert {
 }
 
 const EXPERIENCE_DATA: WorkExp[] = [
+  {
+    role: 'Founder & CEO',
+    company: 'DevTrackAcademy',
+    url: 'https://devtrackacademy.com/',
+    duration: '2026 – Present',
+    location: 'Remote / India',
+    description: 'Founding and leading DevTrackAcademy to empower developers with real-world AI engineering, full-stack development, and hands-on technical skills.',
+    achievements: [
+      'Founded and launched DevTrackAcademy (devtrackacademy.com) learning platform',
+      'Designed practical curriculum for AI engineering, LLM application development, and modern web architectures',
+      'Building and mentoring a thriving community of developers and tech builders',
+    ],
+    stack: ['AI Engineering', 'Full-Stack', 'Next.js', 'LLMs', 'Leadership', 'EdTech'],
+  },
   {
     role: 'AI Engineer Intern',
     company: 'Hathority LLC',
@@ -126,7 +141,20 @@ export default function Experience() {
                     <div className="experience-card-header">
                       <div>
                         <h4 className="exp-role">{exp.role}</h4>
-                        <span className="exp-company">{exp.company}</span>
+                        <span className="exp-company">
+                          @ {exp.url ? (
+                            <a
+                              href={exp.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="company-link"
+                            >
+                              {exp.company} <FiExternalLink style={{ display: 'inline', fontSize: '0.85em', marginLeft: '3px' }} />
+                            </a>
+                          ) : (
+                            exp.company
+                          )}
+                        </span>
                       </div>
                       <span className="exp-duration-badge">{exp.duration}</span>
                     </div>

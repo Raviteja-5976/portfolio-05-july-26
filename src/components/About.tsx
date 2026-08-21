@@ -1,11 +1,19 @@
 'use client';
 
 import Image from 'next/image';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 export default function About() {
   const currentYear = new Date().getFullYear();
 
   const journeyItems = [
+    {
+      year: '2026',
+      role: 'Founder & CEO',
+      company: 'DevTrackAcademy',
+      url: 'https://devtrackacademy.com/',
+      description: 'Founded and leading DevTrackAcademy, an edtech platform and community empowering developers with practical AI engineering, full-stack development, and modern tech skills.',
+    },
     {
       year: '2025',
       role: 'AI Engineer Intern',
@@ -116,7 +124,20 @@ export default function About() {
                     <div className="neo-card timeline-card-content">
                       <div className="timeline-header">
                         <span className="timeline-role">{item.role}</span>
-                        <span className="timeline-company">@ {item.company}</span>
+                        <span className="timeline-company">
+                          @ {item.url ? (
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="company-link"
+                            >
+                              {item.company} <FaExternalLinkAlt style={{ display: 'inline', fontSize: '0.7em', marginLeft: '3px' }} />
+                            </a>
+                          ) : (
+                            item.company
+                          )}
+                        </span>
                       </div>
                       <p className="timeline-desc">{item.description}</p>
                     </div>
