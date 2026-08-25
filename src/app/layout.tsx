@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Raviteja Karnati | AI Engineer | Full Stack Developer | Computer Science Student",
+  title: "Raviteja Karnati | AI Engineer | Full Stack Developer",
   description: "Portfolio of Raviteja Karnati showcasing AI projects, Full Stack Development, Large Language Models, Neural Networks, and software engineering experience.",
   keywords: "AI Engineer, Full Stack Developer, Python, Flask, React, Next.js, Node.js, LLM, RAG, Neural Networks, Software Engineer, Portfolio",
   alternates: {
