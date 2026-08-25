@@ -37,7 +37,7 @@ const EXPERIENCE_DATA: WorkExp[] = [
     stack: ['AI Engineering', 'Full-Stack', 'Next.js', 'LLMs', 'Leadership', 'EdTech'],
   },
   {
-    role: 'AI Engineer Intern',
+    role: 'AI Engineer',
     company: 'Hathority LLC',
     duration: 'Feb 2025 – Aug 2025',
     location: 'Remote',

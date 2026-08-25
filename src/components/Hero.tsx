@@ -40,7 +40,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="hero-subtitle">
-              Hi, I&apos;m <strong>Raviteja Karnati</strong>. An AI Engineer, Full Stack Developer, Entrepreneur, and Freelancer passionate about turning ideas into scalable, intelligent software using Large Language Models, RAG, and modern web architectures.
+              Hi, I&apos;m <strong>Raviteja Karnati</strong>. An AI Engineer, Full Stack Developer, and Entrepreneur passionate about turning ideas into scalable, intelligent software using Large Language Models, RAG, and modern web architectures.
             </p>
 
             {/* CTAs */}
@@ -85,7 +85,7 @@ export default function Hero() {
               </div>
               <div className="avatar-footer">
                 <h3 className="avatar-name">RAVITEJA KARNATI</h3>
-                <p className="avatar-title">ENTREPRENEUR & FREELANCER</p>
+                <p className="avatar-title">AI ENGINEER & ENTREPRENEUR</p>
                 <div className="avatar-divider"></div>
                 <div className="avatar-coords">
                   <span>LOC: HYD, IND</span>

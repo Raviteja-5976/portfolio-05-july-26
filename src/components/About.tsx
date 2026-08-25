@@ -16,7 +16,7 @@ export default function About() {
     },
     {
       year: '2025',
-      role: 'AI Engineer Intern',
+      role: 'AI Engineer',
       company: 'Hathority LLC',
       description: 'Built production AI backend services, API-driven workflows, and robust Retrieval-Augmented Generation (RAG) systems in a remote workspace.',
     },
